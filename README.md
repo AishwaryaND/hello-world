@@ -5,7 +5,7 @@ updated: 2021-02-09
 version: 1.0
 ---
 
-# ICD recover from a Point-In-Time (PIT) backup
+# ICD recovery from a Point-In-Time (PIT) backup
 
 ??? quote "Something missing?"
     [Raise an issue][github-issue] in our issue tracker.
@@ -21,7 +21,7 @@ Backups are restored to a new deployment. After the new deployment finishes prov
 
 <!-- List prerequisites (if any). -->
 
-## ICD recovery from a Point-In-Time (PIT) backup
+## Steops to recover ICD from a Point-In-Time (PIT) backup
 
 <!-- If your runbook involves task-steps, you can organize your document by
     highlighting the major steps (Step 1, Step 2), and then including sub-steps
