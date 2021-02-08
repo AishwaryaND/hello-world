@@ -61,52 +61,58 @@ e.g. crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee157
     ibmcloud resource service-instance-create <SERVICE_INSTANCE_NAME> <service-id> <region> -p '{"point_in_time_recovery_deployment_id":"DEPLOYMENT_ID/CRN", "point_in_time_recovery_time":"TIMESTAMP"}'
     ```
 
-a. restore from the latest PIT backup (in us-east):
-example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p 
-'{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::"}'
+    a. restore from the latest PIT backup (in us-east):
+    example:
+    ```
+    ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::"}'
+    ```
 
-b. restore from a backup created at some point in time (in us-east), e.g. 2020-07-25T22:13:27Z:example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::", "point_in_time_recovery_time":"2020-07-25T22:13:27Z"}'
+    b. restore from a backup created at some point in time (in us-east), e.g. 2020-07-25T22:13:27Z:
+    example: 
+    ```
+    ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::", "point_in_time_recovery_time":"2020-07-25T22:13:27Z"}'
+    ```
 
 7.  check ICD restore status with this bash script:
-```
-continue="true"
-while [ "$continue" == "true" ]
-do
-    date 
-    if ibmcloud cdb ls | grep KPP-RESTORE-PITR-TEST | grep -q provisioning;
-    then 
-        echo ".... still provisioning ..."
-        sleep 600
-    else
-        echo ".... Restore DONE! ..." 
-        continue="false"
-    fi
-done
-```
+    ```
+    continue="true"
+    while [ "$continue" == "true" ]
+    do
+        date 
+        if ibmcloud cdb ls | grep KPP-RESTORE-PITR-TEST | grep -q provisioning;
+        then 
+            echo ".... still provisioning ..."
+            sleep 600
+        else
+            echo ".... Restore DONE! ..." 
+            continue="false"
+        fi
+    done
+    ```
 
 
 8.  Create a "Service credential" for the newly restored ICD instance (KPP-RESTORE-PITR-TEST) in the cloud.ibm.com UI.
-A) login https://cloud.ibm.com/resources
-B) go to "Resource list" --> "Services" --> "the newly restored ICD instance (KPP-RESTORE-PITR-TEST)"
-C) on the left panel, click on "Service credentials"
-D) Click on the "New credential", specify a name on the popup and click "Add"
-E) all the info needed for the next step are in this new "Service credentials" instance
+    A) login https://cloud.ibm.com/resources
+    B) go to "Resource list" --> "Services" --> "the newly restored ICD instance (KPP-RESTORE-PITR-TEST)"
+    C) on the left panel, click on "Service credentials"
+    D) Click on the "New credential", specify a name on the popup and click "Add"
+    E) all the info needed for the next step are in this new "Service credentials" instance
 
 
 9.  update Key Protect's configs to point to the newly restored ICD deployment:
-A) update ICD secrets in vault for the targeted env, 
-e.g. kpp
-generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/host
+    A) update ICD secrets in vault for the targeted env, 
+    e.g. kpp
+    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/host
 
-generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_cert
+    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_cert
 
-generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_password
+    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_password
 
-generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/port
+    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/port
 
-generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/user
+    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/user
 
-B) deploy or redeploy the cluster for pgbouncer to pick up the new ICD settings.  Note the deploy automation now also runs secretsMergehttps://wcp-kms-team-jenkins.swg-devops.com/job/OPS/job/Deploy/
+    B) deploy or redeploy the cluster for pgbouncer to pick up the new ICD settings.  Note the deploy automation now also runs secretsMergehttps://wcp-kms-team-jenkins.swg-devops.com/job/OPS/job/Deploy/
 
 10.  verify KP is working, pointing to the newly created ICD instance and KP is functional (via kp-regress)
 
