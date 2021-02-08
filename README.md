@@ -110,9 +110,7 @@ To recover an ICD from a Point-In-Time (PIT) backup the following steps are requ
 
 9.  update Key Protect's configs to point to the newly restored ICD deployment:
 
-    A) update ICD secrets in vault for the targeted env, 
-
-        e.g. kpp
+    A) update ICD secrets in vault for the targeted env, example: kpp
 
     - generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/host
     - generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_cert
@@ -122,11 +120,11 @@ To recover an ICD from a Point-In-Time (PIT) backup the following steps are requ
 
     B) deploy or redeploy the cluster for pgbouncer to pick up the new ICD settings.  
     
-    Note the deploy automation now also runs secretsMergehttps://wcp-kms-team-jenkins.swg-devops.com/job/OPS/job/Deploy/
+**NOTE:** The deploy automation now also runs secretsMergehttps://wcp-kms-team-jenkins.swg-devops.com/job/OPS/job/Deploy/
 
 10.  verify KP is working, pointing to the newly created ICD instance and KP is functional (via kp-regress)
 
-NOTE: ICD PITR backups are created every 30 minutes or 16 MB of data written.
+**NOTE:** ICD PITR backups are created every 30 minutes or 16 MB of data written.
 
 
 ### Step 1 - access abc
