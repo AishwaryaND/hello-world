@@ -127,25 +127,3 @@ To recover an ICD from a Point-In-Time (PIT) backup the following steps are requ
 
 **Note:** ICD PITR backups are created every 30 minutes or 16 MB of data written.
 
-
-### Step 1 - access abc
-
-To access abc:
-
-1.  Task step
-
-2.  Task step
-
-    ```text
-    code snippet
-    ```
-
-3.  Task step
-
-### Step 2 - add def
-
-### Step 3 - run ghi
-
-<!-- DO NOT REMOVE -->
-
---8<-- "links.md"
