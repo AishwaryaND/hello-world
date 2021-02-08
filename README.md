@@ -96,10 +96,15 @@ To recover an ICD from a Point-In-Time (PIT) backup the following steps are requ
 
 
 8.  Create a "Service credential" for the newly restored ICD instance (KPP-RESTORE-PITR-TEST) in the cloud.ibm.com UI.
+
     a. login https://cloud.ibm.com/resources
+
     b. go to "Resource list" --> "Services" --> "the newly restored ICD instance (KPP-RESTORE-PITR-TEST)"
+
     c. on the left panel, click on "Service credentials"
+
     d. Click on the "New credential", specify a name on the popup and click "Add"
+    
     e. all the info needed for the next step are in this new "Service credentials" instance
 
 
