@@ -67,7 +67,7 @@ example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databas
 b. restore from a backup created at some point in time (in us-east), e.g. 2020-07-25T22:13:27Z:example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::", "point_in_time_recovery_time":"2020-07-25T22:13:27Z"}'
 
 7.  check ICD restore status with this bash script:
----
+```
 continue="true"
 while [ "$continue" == "true" ]
 do
@@ -81,8 +81,8 @@ do
         continue="false"
     fi
 done
+```
 
----
 
 8.  Create a "Service credential" for the newly restored ICD instance (KPP-RESTORE-PITR-TEST) in the cloud.ibm.com UI.
 A) login https://cloud.ibm.com/resources
