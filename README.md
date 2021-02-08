@@ -49,7 +49,10 @@ steps are required:
     ```text
     ibmcloud cdb about deployment-name 
     ```
-e.g. crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::
+    example
+    ```
+    crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::
+    ```
 
 5.  get the earliest PIT backup available:
     ```text
@@ -62,12 +65,14 @@ e.g. crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee157
     ```
 
     a. restore from the latest PIT backup (in us-east):
+    
     example:
     ```
     ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::"}'
     ```
 
     b. restore from a backup created at some point in time (in us-east), e.g. 2020-07-25T22:13:27Z:
+    
     example: 
     ```
     ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::", "point_in_time_recovery_time":"2020-07-25T22:13:27Z"}'
