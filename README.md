@@ -31,44 +31,55 @@ To reconstitute a Key Protect service as a Disaster Recovery site, the following
 steps are required:
 
 1.  login IBM cloud via cli:
-ibmcloud login -r us-south -g Default -a https://cloud.ibm.com --apikey <YOUR KEY>
+    ```text
+    ibmcloud login -r us-south -g Default -a https://cloud.ibm.com --apikey <YOUR KEY>
+    ```
 
 2.  list all the ICD deployments:
-ibmcloud cdb ls
+    ```text
+    ibmcloud cdb ls
+    ```
 
 3.  list all tasks/operations on a specific deployment:
-ibmcloud cdb tasks deployment-name <e.g. keyprotect-kpp-stage-icd>
+    ```text
+    ibmcloud cdb tasks deployment-name <e.g. keyprotect-kpp-stage-icd>
+    ```
 
 4.  get the deployment ID/CRN:
-ibmcloud cdb about deployment-name 
-    example: the "ID" field, 
+    ```text
+    ibmcloud cdb about deployment-name 
+    ```
 e.g. crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::
 
 5.  get the earliest PIT backup available:
-ibmcloud cdb postgresql earliest-pitr-timestamp deployment-name
+    ```text
+    ibmcloud cdb postgresql earliest-pitr-timestamp deployment-name
+    ```
 
 6.  create a new ICD deployment from a PIT backup:
-ibmcloud resource service-instance-create <SERVICE_INSTANCE_NAME> <service-id> <region> -p '{"point_in_time_recovery_deployment_id":"DEPLOYMENT_ID/CRN", "point_in_time_recovery_time":"TIMESTAMP"}'
+    
+    ibmcloud resource service-instance-create <SERVICE_INSTANCE_NAME> <service-id> <region> -p '{"point_in_time_recovery_deployment_id":"DEPLOYMENT_ID/CRN", "point_in_time_recovery_time":"TIMESTAMP"}'
 
-a. restore from the latest PIT backup (in us-east):example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p 
+a. restore from the latest PIT backup (in us-east):
+example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p 
 '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::"}'
 
 b. restore from a backup created at some point in time (in us-east), e.g. 2020-07-25T22:13:27Z:example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p '{"point_in_time_recovery_time":"","point_in_time_recovery_deployment_id":"crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee1571f730811d77b014:92e55dea-b60e-4797-85b0-8397927b4a77::", "point_in_time_recovery_time":"2020-07-25T22:13:27Z"}'
 
 7.  check ICD restore status with this bash script:
-continue="true"
-while [ "$continue" == "true" ]
-do
-    date 
-    if ibmcloud cdb ls | grep KPP-RESTORE-PITR-TEST | grep -q provisioning;
-    then 
-        echo ".... still provisioning ..."
-        sleep 600
-    else
-        echo ".... Restore DONE! ..." 
-        continue="false"
-    fi
-done
+                continue="true"
+                while [ "$continue" == "true" ]
+                do
+                    date 
+                    if ibmcloud cdb ls | grep KPP-RESTORE-PITR-TEST | grep -q provisioning;
+                    then 
+                        echo ".... still provisioning ..."
+                        sleep 600
+                    else
+                        echo ".... Restore DONE! ..." 
+                        continue="false"
+                    fi
+                done
 
 8.  Create a "Service credential" for the newly restored ICD instance (KPP-RESTORE-PITR-TEST) in the cloud.ibm.com UI.
 A) login https://cloud.ibm.com/resources
@@ -119,4 +130,3 @@ To access abc:
 <!-- DO NOT REMOVE -->
 
 --8<-- "links.md"
-
