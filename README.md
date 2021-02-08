@@ -57,8 +57,9 @@ e.g. crn:v1:bluemix:public:databases-for-postgresql:us-south:a/c0a097215c15ee157
     ```
 
 6.  create a new ICD deployment from a PIT backup:
-    
+    ```
     ibmcloud resource service-instance-create <SERVICE_INSTANCE_NAME> <service-id> <region> -p '{"point_in_time_recovery_deployment_id":"DEPLOYMENT_ID/CRN", "point_in_time_recovery_time":"TIMESTAMP"}'
+    ```
 
 a. restore from the latest PIT backup (in us-east):
 example: ibmcloud resource service-instance-create KPP-RESTORE-PITR-TEST databases-for-postgresql standard us-east -p 
