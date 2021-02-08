@@ -1,6 +1,6 @@
 ---
 title: Restore ICD Database from PIT Backup
-description: 
+description: This document highlights the proedure to recover ICD from a Point-In-Time (PIT) backup
 updated: 2021-02-09
 version: 1.0
 ---
