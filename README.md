@@ -112,17 +112,13 @@ To recover an ICD from a Point-In-Time (PIT) backup the following steps are requ
 
     A) update ICD secrets in vault for the targeted env, 
 
-    e.g. kpp
+        e.g. kpp
 
-    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/host
-
-    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_cert
-
-    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_password
-
-    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/port
-
-    generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/user
+    - generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/host
+    - generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_cert
+    - generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/kpservice_password
+    - generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/port
+    - generic/crn/v1/bluemix/public/kms/us-south/kpp/databases/icd-postgresql/user
 
     B) deploy or redeploy the cluster for pgbouncer to pick up the new ICD settings.  
     
