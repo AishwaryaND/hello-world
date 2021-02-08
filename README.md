@@ -1,7 +1,7 @@
 ---
-title: Business Continuity / Disaster Recovery Overview
-description: In accordance with the annual BC/DR process, this document highlights the high-level process for the Key Protect Service
-updated: 2019-08-09
+title: Restore ICD Database from PIT Backup
+description: 
+updated: 2021-02-09
 version: 1.0
 ---
 
