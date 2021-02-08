@@ -21,7 +21,7 @@ Backups are restored to a new deployment. After the new deployment finishes prov
 
 <!-- List prerequisites (if any). -->
 
-## Steops to recover ICD from a Point-In-Time (PIT) backup
+## Steps to recover ICD from a Point-In-Time (PIT) backup
 
 <!-- If your runbook involves task-steps, you can organize your document by
     highlighting the major steps (Step 1, Step 2), and then including sub-steps
