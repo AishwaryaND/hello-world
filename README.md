@@ -10,6 +10,25 @@ version:1.0
 ??? quote "Something missing?"
     [Raise an issue][github-issue] in our issue tracker.
 
+
+## Business Continuity
+
+Business Continuity involves updates to the cluster state, global and regional
+load balancers, as well as Shared Operating Services compliance configuration
+and verification.
+
+## Disaster Recovery
+
+Disaster Recovery involves reconstituting a Key Protect service in a new or old
+cluster, or even in a remote region.
+
+There are two different Disaster Recovery procedures currently available:
+
+-   For US-South there is a active DR site in US-East
+
+-   For all other sites, a new Key Protect service needs to be created,
+    configured, and initialized
+    
 ## Overview
 
 <!-- Add contextual or background information. -->
