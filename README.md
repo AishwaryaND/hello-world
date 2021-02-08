@@ -81,6 +81,7 @@ do
         continue="false"
     fi
 done
+
 ---
 
 8.  Create a "Service credential" for the newly restored ICD instance (KPP-RESTORE-PITR-TEST) in the cloud.ibm.com UI.
